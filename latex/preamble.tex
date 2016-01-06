@@ -1,0 +1,46 @@
+% This documents defines:
+% 1. Dependecies on packages.
+% 2. Custom macros, used throughout the rule-book.
+
+% Packages.
+% \usepackage[options]{names,comma,separated}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+%\usepackage[bulgarian]{babel}
+
+% Fonts listing. Exactly one must be selected.
+% List all fonts with "locate /t2a | grep 'texlive/texmf-dist/tex/latex/.*\.fd$'".
+% \usepackage{antt}      % Doesn't work.
+% \usepackage{cantarell}
+% \usepackage{cm-lgc}    % Doesn't work.
+% \usepackage{comfortaa}
+% \usepackage{cyrillic}  % Doesn't work.
+% \usepackage{droid}
+\usepackage{iwona}
+% \usepackage{kurier}
+% \usepackage{opensans}
+
+\usepackage[pdftex]{graphicx}
+\usepackage[table]{xcolor}     % For coloured rows within tables.
+\usepackage{fullpage}          % Set left and right margin to 1 inch - much less than the default.
+\usepackage{multicol}
+\usepackage{enumitem}          % \begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1ex]
+\usepackage{mdwlist}           % Compact lists via starred version e.g. enum*
+\usepackage{wrapfig}           % Make floats, such as figures and tables, inline e.g. \begin{wraptable}{l}{5.5cm}.
+\usepackage{enumitem}          % Customize enumerate, itemize, list.
+
+% Macros, declared in separate headers.
+
+% Commands.
+% \newcommand{name}[num]{definition}
+\newcommand{\standout}[1]{\textbf #1}  % Anyone, who has read the rules, can skim through these sections for important information.
+
+% Environments.
+% \newenvironment{name}[num]{before}{after}
+\newenvironment{shortstory}{\itshape}{}  % Fluff material, to get the reader in the mood for the incoming section.
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}  % Horizontal line.
+\newcommand{\firstletter}{}  % Old book style huge, gorgeous first letter of the chapter.
+\newcommand{\mychapter}{}  % A subsection title with an optional accompaning image.
+\newcommand{\smallrules}{}  % Under a small heading, list consicely several unrelated rules (paragraphs).
+% \newcommand{\alternateTableRowColor}{{\rowcolors}{1}{white}{lightgray}}  TODO: how to make this work?
