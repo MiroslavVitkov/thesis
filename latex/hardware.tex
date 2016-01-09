@@ -110,3 +110,41 @@ We observe that:
 \item{The pulse is very wide - about $3.2\si{\milli\second} \equiv$ 32\% of the half-period.}
 \item{The puslse is centered. This is great, because we can estimate the true zero crossing in software.}
 \end{enumerate}
+
+\subsection{Thermometer}
+% TODO insert a picture
+It is impossible to examine the temperature sensing element in isolation to the heater.
+Therefore, in this chapter, the complete plant, or in other words the combination of heater, thermal mass and thermometer, will be examined.
+\par
+As this is an educational project, the quickest possible system responce is desired.
+Therefore, the thermometer is directly gued to the surface of the heater.
+Unfortunately, even in this setup, the maximum possible heating rate is about $6\si{\celsius}/\si{\minute}$ and cooling is even slower.
+
+\subsubsection{Heater}
+Initially, a $60\si{\watt}$ incandescent light bulb was selected.
+As European wall power exhibits frequency of $50\si{\hertz}$, the highest switching frequency is $100\si{\hertz}$ by half-periods.
+Astonishing to the experimenter:
+\begin{itemize}
+\item{The fillament is not inert enough to integrate consecutive pulses, even if every odd half-wave is enabled.}
+\item{The human eye is unable to integrate the resulting $50\si{\hertz}$ flicker.}
+\end{itemize}
+As a result, looking in the controlled bulb is extremely annoying.
+\par
+Consequenctly, a fish tank heater with nominal (maximum) power of $50\si{\watt}$ was selected.
+The observed temperature curves are equivelent sans the maddening light flicker.
+\textbf{The thermometer is glued to the surface to the heater for fastest response possible.}
+
+\subsubsection{Temperature sensor}
+The Dallas Semiconductor DS18S20 has been selected due to a variety of reasons:
+% TODO: quote http://datasheets.maximintegrated.com/en/ds/DS18S20.pdf
+\begin{itemize}
+\item{low price}
+\item{ease of interfacing to digital components}
+\item{ease of wireing}
+\item{extreme flexability of integration}
+\end{itemize}
+This device is incedible.
+It can operate solely over two wires - including the ground wire.
+It performs digital temperature conversions, removing the need of an ADC (although our selected microcontroller features such).
+It can coexist on the same bus with as many as $2^{56}\equiv$ infinite number of other onewire sensors.
+
