@@ -31,3 +31,12 @@ Only a single main board is required, as the selected microcontroller, although 
 In order to satisfy the requirement for simplicity, the main board is configured for a single SCR output board.
 However, soldering aditional connectors to the main PCB is trivial, thus acheaving extensability.
 The SCR output board is long-life and supports loads of up to 1\si{\kilo\watt}.
+
+\subsection{ZCD board}
+The ZCD board is a sensory input to the microcontroller.
+Because the voltage of mains power is alternating, it is impossible to output precise amounts of power without knowing the phase of the waveform.
+The implementation of the ZCD board is straightforward and extremely simplified.
+In fact, an extensive internet search has demonstrated no other PCB has ever been designed with such a level of simplicity.
+In other words, \textbf{the designed PCB contains fewer elements than any known PCB for the same purpose}!
+This produces problems, which have deterred other designers.
+However, all artifats have been dealt with in software.
