@@ -69,6 +69,10 @@ Striving for minimal component count and price, the standard solution with a 10W
 Thus, we need to work with 1/4W, E24 resistors.
 Due to the optocoupler's acceptable CTR, and extensive signal conditioning in software, this solution will provide to be viable!
 \par
+It is worthy to note that the resistor rated voltage is of utmost importance.
+Because our resistors are rated to $200\si{\volt}$ peak, it would be a dangerous mistake to use a signel resistor.
+Therefore, the $V_{AC} = 230\si{\volt}$, $V_{peak} - V_{AC} * \sqrt(2) = 325\si{volt}$ is safely spread onto two identical resistors.
+\par
 Let's suppose the line voltage varies from $V_{min} = 200VAC$ to $V_{max} = 250VAC$ rms.
 $$ P_{input resistors} = \frac{V_{max}^2}{R_1 + R_2}$$
 $$ R_1 + R_2 \geq \frac{V_{max}^2}{P_{input resistors, max}} = \frac{250^2}{0.25+0.25} = 125\si{\kilo\ohm}$$
@@ -85,3 +89,24 @@ $$ i_C * R_{output} = 1V $$
 $$ R_{output} = 1V / 0.47mA = 2.13Kohm$$
 We select $R_3 = 2.4\si{\kilo\ohm}$.
 
+\subsubsection{Measurements}
+Firstly, a temperature measurement is performed.
+The device is allowed to run for 10 minutes.
+Subsequencly, each component is measured or overheating.
+Becuse component temperature measurement instrumentation is both expensive and dfficult to apply, the following rule of thunmb is used:
+\textit{if a silicone component is too hot to keep your finger on it, it is too hot}.
+% TODO: state a source
+Althought the stated metod is vastly imprecise, it works well, because the skin pain temperature (about $60\si{\celsius}$) is far lower than silicone semicondutor Absolute Maximum Temperature (often $150\si{\celsius}$).
+% TODO: state a source
+\par
+%TODO: one of those guys can go on the previous page!
+\includegraphics[width=0.85\textwidth]{../images/ZCD_scope1}~
+\\
+\includegraphics[width=0.85\textwidth]{../images/ZCD_scope2}~
+\par
+We observe that:
+% TODO: why numbers? convert to bullet points.
+\begin{enumerate}
+\item{The pulse is very wide - about $3.2\si{\milli\second} \equiv$ 32\% of the half-period.}
+\item{The puslse is centered. This is great, because we can estimate the true zero crossing in software.}
+\end{enumerate}
