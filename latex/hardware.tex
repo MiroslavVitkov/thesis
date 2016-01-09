@@ -1,6 +1,6 @@
 \section{Hardware}
 \subsection{Definitons}
-All physical components, resulting from this project, will be called 'device' throughout the paper..
+All physical components, resulting from this project, will be called 'device' throughout the paper.
 
 \subsection{Goals}
 The device is intended as a learning project for the student, but also as a open software, open-hardwre project, which anyone can create and use.
@@ -13,7 +13,21 @@ Thus, the following hardware design priorities have been identified, in order of
 \item{price - the BOM for the complete device shall not exceed 100BGN}
 \item{extendability - the number of input sensors and the number of output controllers, shall be trivially configurable}
 \item{ease of assembly - it shall be possible for a person with zero hardware experience to manufacture the device}
-\item{minimalism - each component shall fufill a specific purpose, and the number of components shall be the lowest possible}
+\item{simplicity - each component shall fufill a specific purpose, and the number of components shall be the lowest possible}
 \end{itemize}
 
-\subsection{}
+\subsection{Layout}
+Due to the requirement of extendability, the device shall consist of a number of printed circuit boards, in contrast to a single  monolyotic PCB.
+Each PCB shall fufill a sole purpose, and any number of different modules shall be able to mate together.
+The following distinct roles have been identified:
+\begin{itemize}
+\item{high-voltage input stage - called zero-cross detector or ZCD board from now on}
+\item{computational stage - called main board from now on}
+\item{high-voltage output stage - called software controlled rectifier board or SCR board from now on}
+\end{itemize}
+The resulting design exhibits the following characteristics.
+Only a single ZCD board is required, because mains waveform is invariant across the device in it's entirety.
+Only a single main board is required, as the selected microcontroller, although inexpensive, provides plenty of resources for numerous control loops.
+In order to satisfy the requirement for simplicity, the main board is configured for a single SCR output board.
+However, soldering aditional connectors to the main PCB is trivial, thus acheaving extensability.
+The SCR output board is long-life and supports loads of up to 1\si{\kilo\watt}.
