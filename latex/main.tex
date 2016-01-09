@@ -1,9 +1,14 @@
-\documentclass[12pt,a4paper,twoside,openany]{article}
+\documentclass[12pt,a4paper,twoside,openany]{report}
 
 % Used packages, global commands, styles.
 \input{preamble}
 
 \begin{document}
 \input{titlepage.tex}
+\renewcommand{\thepage}{\roman{page}}  % Roman numerals for page counter
 \tableofcontents
+\clearpage
+\setcounter{page}{1}
+\renewcommand{\thepage}{\arabic{page}}  % Arabic numerals for page counter
+\input{hardware}
 \end{document}
