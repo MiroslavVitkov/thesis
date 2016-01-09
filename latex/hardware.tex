@@ -1,13 +1,13 @@
 \section{Hardware}
 \subsection{Definitons}
-All physical components, resulting from this project, will be called 'device' throughout the paper.
+The entirety of all physical components, resulting from this project, will be called 'device' throughout the paper.
 
 \subsection{Goals}
 The device is intended as a learning project for the student, but also as a open software, open-hardwre project, which anyone can create and use.
 Thus, the following hardware design priorities have been identified, in order of decreasing importance:
 % TODO: create a custom environment, which bolds the word before the dash
 \begin{itemize}
-\item{safety - the device shall not cause a fire or electric shock to the end user}
+\item{safety - the device shall not pose a fire or electric shock hazard to the end user}
 \item{reconstructability - the device shall be composed \textbf{only} of worldwide accessible components}
 \item{longivity - the device shall remain operational for 5 years of uninterrupted service with 95\% confidence}
 \item{price - the BOM for the complete device shall not exceed 100BGN}
@@ -17,23 +17,31 @@ Thus, the following hardware design priorities have been identified, in order of
 \end{itemize}
 
 \subsection{Layout}
-Due to the requirement of extendability, the device shall consist of a number of printed circuit boards, in contrast to a single  monolyotic PCB.
+Due to the requirement of extendability, the device shall consist of a number of printed circuit boards, in contrast to a single  monoliotic PCB.
 Each PCB shall fufill a sole purpose, and any number of different modules shall be able to mate together.
 The following distinct roles have been identified:
 \begin{itemize}
 \item{high-voltage input stage - called zero-cross detector or ZCD board from now on}
+\item{low-voltage input stage - called temperature sensor or thermometer from now on}
 \item{computational stage - called main board from now on}
 \item{high-voltage output stage - called software controlled rectifier board or SCR board from now on}
 \end{itemize}
 The resulting design exhibits the following characteristics.
+\par
 Only a single ZCD board is required, because mains waveform is invariant across the device in it's entirety.
 Only a single main board is required, as the selected microcontroller, although inexpensive, provides plenty of resources for numerous control loops.
+\par
 In order to satisfy the requirement for simplicity, the main board is configured for a single SCR output board.
 However, soldering aditional connectors to the main PCB is trivial, thus acheaving extensability.
 The SCR output board is long-life and supports loads of up to 1\si{\kilo\watt}.
+\par
+The most flexible part of the system is the thermometer configuration.
+Due to the selected temperature sensing IC, virtually unlimited (technically up to $2^{56}$) devices are supported \textbf{without any hardware changes}.
+% TODO: on the aboce, quote http://datasheets.maximintegrated.com/en/ds/DS18S20.pdf
 
 \subsection{ZCD board}
 The ZCD board is a sensory input to the microcontroller.
+\par
 Because the voltage of mains power is alternating, it is impossible to output precise amounts of power without knowing the phase of the waveform.
 The implementation of the ZCD board is straightforward and extremely simplified.
 In fact, an extensive internet search has demonstrated no other PCB has ever been designed with such a level of simplicity.
