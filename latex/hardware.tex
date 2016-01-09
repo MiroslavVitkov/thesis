@@ -48,3 +48,54 @@ In fact, an extensive internet search has demonstrated no other PCB has ever bee
 In other words, \textbf{the designed PCB contains fewer elements than any known PCB for the same purpose}!
 This produces problems, which have deterred other designers.
 However, all artifats have been dealt with in software.
+
+\subsubsection{Schematic}
+Please refer to appendix A1 for the schematic and layout of the board.
+
+\subsubsection{Calculation}
+In order to protect the main board (and thus the user) from dangerous voltages, galvanic isolation is required.
+The standard means to this end are transformers and optocouplers.
+Optocouplers posess numerous advantages over transformers for our application:
+\begin{itemize}
+\item[--]{compactness}
+\item[--]{low price}
+\item[--]{neglegable phase shift}
+\end{itemize}
+Furthermore, among optocouplers, the variation is considerable.
+We select a component with anti-parallel input LEDs, specifically designed for zero crossing - SFH620A-3.
+This is the most sensitive version of the IC (highest CTR), as input power is our greates concern.
+\par
+Striving for minimal component count and price, the standard solution with a 10W input power resistor is dismissed.
+Thus, we need to work with 1/4W, E24 resistors.
+Due to the optocoupler's acceptable CTR, and extensive signal conditioning in software, this solution will provide to be viable!
+\par
+Let's suppose the line voltage varies from $V_{min} = 200VAC$ to $V_{max} = 250VAC$ rms.
+$$ P_{input resistors} = \frac{V_{max}^2}{R_1 + R_2}$$
+$$ R_1 + R_2 \geq \frac{V_{max}^2}{P_{input resistors, max}} = \frac{250^2}{0.25+0.25} = 125\si{\kilo\ohm}$$
+
+We select R1 = R2 = 68Kohm.
+$$ i_{in, min} = \frac{V_{min} - 1.65}{2 * R_1 *1.05} = \frac{198.35V}{142.8Kohm} =  1.39\si{\milli\ampere}$$
+
+%From here on, using [these](http://electronics.stackexchange.com/a/33043/9910) or [these](http://electronics.stackexchange.com/a/93597/9910) calculations, we select 10Kohm or 15kohm for the output resistor.
+
+%Conclusion: minimum component count and price, borderline reliability, should work for a couple of years at least.
+
+%*Would the schematic work? Would it be reliable for a couple of years of constant operation?*
+
+%---
+
+%The output stage:
+%
+%$$  i_C \geq i_{in, min} * CTR_{min} \approx 1.39 mA * 0.34 \approx 0.47mA $$
+%
+%[atmega168](http://www.atmel.com/images/atmel-42176-atmega48pb-88pb-168pb_datasheet.pdf), page 302
+%
+%$$ i_{leakage} \leq 1uA $$
+%$$ V_{IL} = 0.3 Vcc = 0.3 * 5V = 1.5V $$
+%$$ V_{IH} = 0.6 Vcc = 0.3 * 5V = 3V $$
+%
+%If we strive to be below 1V for logic zero:
+%$$ i_C * R_{output} = 1V $$
+%$$ R_{output} = 1V / 0.47mA = 2.13Kohm$$
+%
+%We select 2.4Kohm.
