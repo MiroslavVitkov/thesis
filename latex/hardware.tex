@@ -167,3 +167,44 @@ The selected power triac is BT136 600E, providing control over applicances of up
 %TODO: again link to datasheets
 
 \subsubsection{Measurements}
+
+\subsection{Main board}
+The main board houses the microcontroller, provides stable power to it and contains connector blocks to the other boards.
+
+\subsubsection{Microcontroller}
+The selected microcontroller is atmega168 from Atmel.
+It provides plenty of computing power and sufficient 16KB flash program memory at extremely modest cost.
+It can be programmed in assembler, C or C++ with widely available and free of charge tools.
+The datasheet is well written and a pletora of application notes are available from Atmel.
+Not to mention the extensive worldwide community, readily providing help to anyone new to the subject.
+
+\subsubsection{Power filtering}
+Three groups of components are responsible for providing clean and steady power to the microcontroller.
+\par
+Firstly, an LC filter at the power connector of the board provides filtering of the external power.
+%TODO: L5 and C11
+This procets against insufficiently filtered power supplies and allows powering the board from a low cost wall adapter "brick".
+Furthermore, any EMI picked over a long power supply coard, is eliminated.
+Moreover, the LC filter isolates the board from the power supply, allowing the PSU to power other devicecs in the same time, free of digital switching noise.
+\par
+Secondly, a combination of two capacitors, in close physical proximity to the microcontroller power leads, further conditions the power supply rail.
+As the microcontroller draws significant current for intervals far shorter tahn one microsecond, the PCB traces gain significant impedance.
+Consequently, this second group of capacitors needs to be located as close as possible to the IC.
+What's more, comodity electrolytic capacitors cannot operate at such high frequencies.
+Consequently, a ceramic capacitor is added, to handle the high frequency current pulses.
+%TODO: C23 C55
+%TODO: cite sources
+
+Lastly, the RESET pin of the controller is extremely sensitive to even short power line pulses (of the length of one clock cycle).
+Therefore, the exact RC circuit, recommended by Atmel, is used.
+% TODO: quote avr app note
+
+\subsubsection{Connectors}
+The selected connector  is NX5080-03SMR.
+This is a 3-pin, fixed orientation, low-current connector.
+The pin number is ideal for providing both power and a communication bus to connected boards.
+Because no terminal blocks are used, and all four connectors are wired in consistent fashion, incorrect wirein of the board is impossible.
+
+\subsubsection{Extendability}
+It has been paid attention to provide free PCB real estate, as well as conveniently located free processor pins.
+Consequently, it is trivial to add more connectors, or even a display, to the main board at a later moment of time.
