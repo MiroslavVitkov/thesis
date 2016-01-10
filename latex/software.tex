@@ -137,10 +137,41 @@ This is expected to provide the following benefits:
 \item{Software modules are easy to remove from the current project and insert into another, unrelated, project.}
 \end{enumerate}
 
-\subsection{Configuration}
-\subsection{Clock}
-\subsection{Serial communication}
-\subsection{Commands}
-\subsection{Zero-cross detector}
-\subsection{Triac cotnrol}
-\subsection{Temperature measurement}
+\subsection{Modules}
+\subsubsection{Configuration}
+Following best programming practices, the author has exported global project setting to the file 'src/config.h'.
+From there it is easy to control:
+\begin{itemize}
+\item{all serial communication options}
+\item{hardware bindings id est which pins fufill which tasks}
+\item{thermometer library settings}
+\item{is error checking to be performed}
+\end{itemize}
+
+\subsubsection{Clock}
+This module utilizes a separate hardware timer to provide timekeeping and event management services.
+The module keeps track of relative time, that is seconds elapsed from turn-on.
+The clock wrap period is 136 years.
+\par
+Event management is acheaved through the function clock\_sleep\_until\_next\_second().
+This is the essence of the multitasking system.
+
+\subsubsection{Serial communication}
+The built-in 'Universal sinchronous and asynchronous receive and transmit unit' or USART module is utilized in an elegant way.
+%TODO: quote the datasheet
+By providing implementation to functions put\_char() and get\_char(), the usart software modules actually binds 'stdin', 'stderr' and 'stdout' streams to the USART unit.
+This fasciliates usage of standard stream operations, such as 'printf()' and 'scanf()'.
+An added advantage is that the serial communiation implementation can be changed - e.g. to flow over USB or Bluetooth, and zero client code will need to be modified.
+
+\subsubsection{Commands}
+Utilizing the multitasking architecture of the software, a 'commands' module is implemented, which accepts user instructions at all possible time points, irrespective of currently executed tasks.
+An added advantage of the commands system is that the device is fully scriptable.
+Elaborating, a 'bash' script can issue commands to the system and read status back.
+Such a script can, for example, log temperature data and performed control actions by the device.
+As a matter of fact, such a script is provided, together iwth a Qt4 implementation of a temperature data visualization tool.
+For more details, see the section Plotting tool
+
+\subsubsection{Zero-cross detector}
+\subsubsection{Triac cotnrol}
+\subsubsection{Temperature measurement}
+\subsection{Plotting tool}
