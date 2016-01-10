@@ -148,3 +148,22 @@ It can operate solely over two wires - including the ground wire.
 It performs digital temperature conversions, removing the need of an ADC (although our selected microcontroller features such).
 It can coexist on the same bus with as many as $2^{56}\equiv$ infinite number of other onewire sensors.
 
+\subsection{SCR board}
+\subsubsection{SChematic}
+
+\subsubsection{Calculation}
+Because we want to operate with more precision than an on-off controller, the following requirements are layed out:
+\begin{itemize}
+\item{Life must exceed 3153600000 switches.}
+\item{Switching times must be in the microsecond range.}
+\item{Galvanic isolation.}
+\end{itemize}
+In the light of this sepcification, it immediately becomes obvious that an electro-mechanical relay is not suitable.
+% TODO: cite Shishkov
+Again an optocoupler has been selected.
+The MOC3023 is canonical for power controll aplications.
+It is a triac output optocoupler, specifically designed to drive a power triac.
+The selected power triac is BT136 600E, providing control over applicances of up to $4\si{\ampere} * 230\si{\volt} = 920\si{\watt}$.
+%TODO: again link to datasheets
+
+\subsubsection{Measurements}
