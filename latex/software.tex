@@ -1,0 +1,90 @@
+\section{Software}
+The device is a typical realtime embedded system.
+As such, mainframe programming tecniques are not applicable and embedded systems approach is required.
+Consequently, the following requirements are layed out to the program:
+\begin{itemize}
+\item{Conveninet programming - during development, reprogramming the device shall be quick and easy, preferrably consisting of a single action.}
+\item{Convenient communication - both debug data and process information shall be easily accessible during device operation.}
+\item{Error tolerance - the device shall not freeze up upon an error, but should instead make best effort to keep the control loop active.}
+\item{Determinism - the programmer needs to have full control over what is executed when.}
+\item{Scriptability - the device shall be able to get reconfigured without a human at the other end id est a PC program shall be provided, which reconfigures the device in arbitrary ways.}
+\end{itemize}
+In the oppinion of the author, all of these requirements have been fully fufilled with the current version of the software.
+The written software is free and open-source in it's entirety - it is protected under the MIT license.
+
+\subsection{Bootloader}
+\subsubsection{Motivation}
+Several approaches were evaluated to reprogram the chip.
+\par
+As the chip resides in a socket, instead of being soldered to the Main board, it could be removed from it's socket and inserted into a programmer.
+This approach is useful, but was discarded as extremely time-consuming.
+\par
+The next possible approach is In-system programming.
+%TODO: quote something
+This constitutes soldering a header onto the Main board, and connecting it to the SPI bus of the microcontroller.
+This approach was also rejected for hte following reasons.
+The author was relucant to pay both the price in real estate on the PCB and the aditional complexity of wirein the header to the microcontroller.
+Not to mention using up some pins.
+Last but not least, this approach would significantly complicate the RESET pin nooise protection circuit.
+\par
+The most complex, but in the same time best performing, approach was selected.
+Utilizing the fact that serial communication to a PC is needed for other reasons, the author decided to transfer new programs over the same bus.
+This way the device can be reprogrammed purely bu software, possibly even from a remote location.
+
+\subsubsection{Previous work}
+Many bootloader programs exist for the selected chip.
+%TODO: quote 3-4
+Unfortunately, all of them are either:
+\begin{itemize}
+\item{bloated with unnececery functionality, thus large in size,}
+\item{do not work out of the box and thus require manipulation of the source code to work or}
+\item{are licensed under un incompatible license than the veri permissive MIT license.}
+\end{itemize}
+
+\subsubsection{Implementation}
+The bootloader was implemented in standard-conforming C language, and written by the author in it's entirety.
+It is nearly impossible to create smaller in size bootloader for this device.
+%TODO: quote avr-freaks
+The program code is simple and straighforward, lacking complicated preprocessor directives.
+Consequencly, it is in the oppinion of the author, easy to read and modify by anyone.
+The code is of cource publically visible and licensed in a way, that any person can freely and legally modify and redistribute it.
+\par
+The bootloader instructions reside at the high end of the flash memory, while the application resides in the low end.
+%TODO: quote the datasheet
+Consequencly, the application never knows that a bootloader program was installed.
+\par
+The finished product was called 'megaboot' - a bootloader for atmega devices.
+The source code in its entirety is provided as appendix A1.
+
+\subsubsection{Communication protocol}
+The XMODEM protocol has been selected.
+%TODO: quote
+This protocol is not used in modern high-bandwidth, high-complexity networking.
+To the contrary. this protocol was popular when computers posessed resources comparable to the selected microcontroller.
+It is a simple protocol with very little overhead (channel efficiency is 97\%).
+Furthermore, it is easy to implement in few program instruction, using up small amount of flash memory.
+
+\subsubsection{Error checking}
+Erorr checking is provided throughtout the program:
+\begin{itemize}
+\item{CRC sums onto each received XMODEM packet}
+\item{"magic character" starts each packet}
+\item{addressing wrong (inexistient) flash pages is protected against}
+\item{receiving packets out of order is also checked agains}
+\end{itemize}
+All the error checking code is conditionally included via the only preprocessor definition.
+This serves twin purpose.
+Not only does it clearly indicate error checking code apart from the actual program logic, but also provides the option to remove all error checking, should a person attempt to reduce the program size to the next smaller option.
+
+\subsubsection{Use}
+The build system passes the symbol BOOTLOAD to the application program.
+This symbol holds the address of the first instruction of the bootloader.
+The application is then free to jump to that address whenever required.
+In an assembler program, this would have been performed via a RJMP instruction.
+On the other hand, higher level languages cast the pointer to a function call address (optionally with the \_Noreturn attribute) and call it.
+\par
+After the bootloader has been invoked, it expects program data over the communication channel.
+Fortunately, many applications are available, which support the XMODEM protocol.
+One example is the popular and free serial terminal 'minicom'.
+
+\subsection{Architecture}

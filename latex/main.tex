@@ -5,11 +5,16 @@
 
 \begin{document}
 \input{titlepage.tex}
+
+% Table of contents, with its own page numbering.
 \setcounter{page}{1}
 \renewcommand{\thepage}{\roman{page}}  % Roman numerals for page counter
 \tableofcontents
 \clearpage
 \setcounter{page}{1}
+
 \renewcommand{\thepage}{\arabic{page}}  % Arabic numerals for page counter
 \input{hardware}
+\input{software}
+
 \end{document}
