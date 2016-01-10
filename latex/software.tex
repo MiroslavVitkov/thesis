@@ -1,4 +1,5 @@
 \section{Software}
+\subsection{Goals}
 The device is a typical realtime embedded system.
 As such, mainframe programming tecniques are not applicable and embedded systems approach is required.
 Consequently, the following requirements are layed out to the program:
@@ -11,6 +12,12 @@ Consequently, the following requirements are layed out to the program:
 \end{itemize}
 In the oppinion of the author, all of these requirements have been fully fufilled with the current version of the software.
 The written software is free and open-source in it's entirety - it is protected under the MIT license.
+
+\subsection{Language selection}
+The selected processor can be programmed in avr-assembler, C or C++.
+Additionally, compilers exist for other less widespread languages, such as ADA.
+%TODO: quote
+The author has selected the C language for it's simplicity, widespread use and compiler support for all of it's features.
 
 \subsection{Bootloader}
 \subsubsection{Motivation}
@@ -96,6 +103,7 @@ A professional implementation of a parallel pid with integral saturation, implem
 % TODO: quote the app note
 
 \subsection{Architecture}
+\subsubsection{Theory}
 Numerous program architectures have been published throughout embedded programming books.
 %TODO: quote
 However, they all fall in one of the following three groups:
@@ -118,6 +126,16 @@ Nevertheless, there exist lightweight multitasking operating systems for atmega 
 \end{itemize}
 % TODO: quote a couple of references
 The author has selected the secodnd approach.
+
+\subsubsection{Implementation}
+The file 'src/main.c' performs scheduling of the services, provided by the remaining modules.
+The author has put effort into making all other modules independent of each other.
+This is expected to provide the following benefits:
+\begin{enumerate}
+\item{The code is simple and easy to understand.}
+\item{The implementation is not prone to error, due to chaning an unrelated portion of the code.}
+\item{Software modules are easy to remove from the current project and insert into another, unrelated, project.}
+\end{enumerate}
 
 \subsection{Configuration}
 \subsection{Clock}
