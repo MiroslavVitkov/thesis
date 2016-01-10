@@ -1,6 +1,7 @@
 \section{Hardware}
 \subsection{Definitons}
-The entirety of all physical components, resulting from this project, will be called 'device' throughout the paper.
+device - the entirety of all physical components, resulting from this project.  \\
+CTR - current transfer ratio, optocoupler characteristic.
 
 \subsection{Goals}
 The device is intended as a learning project for the student, but also as a open software, open-hardwre project, which anyone can create and use.
@@ -70,23 +71,23 @@ Thus, we need to work with 1/4W, E24 resistors.
 Due to the optocoupler's acceptable CTR, and extensive signal conditioning in software, this solution will prove to be viable!
 \par
 It is worthy to note that the resistor rated voltage is of utmost importance.
-Because our resistors are rated to $200\si{\volt}$ peak, it would be a dangerous mistake to use a signel resistor.
-Therefore, the $V_{AC} = 230\si{\volt}$, $V_{peak} - V_{AC} * \sqrt(2) = 325\si{\volt}$ is safely spread onto two identical resistors.
+Because our resistors are rated to $200\si{\volt}$ peak, it would be a dangerous mistake to use a single resistor.
+Therefore, the $V_{AC} = 230\si{\volt}$, $V_{peak} = V_{AC} * \sqrt{2} = 325\si{\volt}$ is safely spread onto two identical resistors.
 \par
 Let's suppose the line voltage varies from $V_{min} = 200VAC$ to $V_{max} = 250VAC$ rms.
 $$ P_{input resistors} = \frac{V_{max}^2}{R_1 + R_2}$$
 $$ R_1 + R_2 \geq \frac{V_{max}^2}{P_{input resistors, max}} = \frac{250^2}{0.25+0.25} = 125\si{\kilo\ohm}$$
 We select $R_1 = R_2 = 68\si{\kilo\ohm}$.
-$$ i_{in, min} = \frac{V_{min} - 1.65}{2 * R_1 *1.05} = \frac{198.35V}{142.8Kohm} =  1.39\si{\milli\ampere}$$
+$$ i_{in, min} = \frac{V_{min} - 1.65}{2 * R_1 *1.05} = \frac{198.35V}{142.8\si{\kilo\ohm}} =  1.39\si{\milli\ampere}$$
 The output stage:
-$$  i_C \geq i_{in, min} * CTR_{min} \approx 1.39 mA * 0.34 \approx 0.47mA $$
+$$  i_C \geq i_{in, min} * CTR_{min} \approx 1.39 \si{\milli\ampere} * 0.34 \approx 0.47\si{\milli\ampere} $$
 %TODO: [atmega168](http://www.atmel.com/images/atmel-42176-atmega48pb-88pb-168pb_datasheet.pdf), page 302
-$$ i_{leakage} \leq 1uA $$
-$$ V_{IL} = 0.3 Vcc = 0.3 * 5V = 1.5V $$
-$$ V_{IH} = 0.6 Vcc = 0.3 * 5V = 3V $$
+$$ i_{leakage} \leq 1\si{\micro\ampere} $$
+$$ V_{IL} = 0.3 Vcc = 0.3 * 5\si{\volt} = 1.5\si{\volt} $$
+$$ V_{IH} = 0.6 Vcc = 0.3 * 5\si{\volt} = 3\si{\volt} $$
 If we strive to be below 1V for logic zero:
 $$ i_C * R_{output} = 1V $$
-$$ R_{output} = 1V / 0.47mA = 2.13Kohm$$
+$$ R_{output} = 1\si{\volt} / 0.47\si{\milli\ampere} = 2.13\si{\kilo\ohm}$$
 We select $R_3 = 2.4\si{\kilo\ohm}$.
 
 \subsubsection{Measurements}
@@ -143,7 +144,7 @@ The Dallas Semiconductor DS18S20 has been selected due to a variety of reasons:
 \item{ease of wireing}
 \item{extreme flexability of integration}
 \end{itemize}
-This device is incedible.
+This device is incredible.
 It can operate solely over two wires - including the ground wire.
 It performs digital temperature conversions, removing the need of an ADC (although our selected microcontroller features such).
 It can coexist on the same bus with as many as $2^{56}\equiv$ infinite number of other onewire sensors.
