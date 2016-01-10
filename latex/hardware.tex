@@ -67,11 +67,11 @@ This is the most sensitive version of the IC (highest CTR), as input power is ou
 \par
 Striving for minimal component count and price, the standard solution with a 10W input power resistor is dismissed.
 Thus, we need to work with 1/4W, E24 resistors.
-Due to the optocoupler's acceptable CTR, and extensive signal conditioning in software, this solution will provide to be viable!
+Due to the optocoupler's acceptable CTR, and extensive signal conditioning in software, this solution will prove to be viable!
 \par
 It is worthy to note that the resistor rated voltage is of utmost importance.
 Because our resistors are rated to $200\si{\volt}$ peak, it would be a dangerous mistake to use a signel resistor.
-Therefore, the $V_{AC} = 230\si{\volt}$, $V_{peak} - V_{AC} * \sqrt(2) = 325\si{volt}$ is safely spread onto two identical resistors.
+Therefore, the $V_{AC} = 230\si{\volt}$, $V_{peak} - V_{AC} * \sqrt(2) = 325\si{\volt}$ is safely spread onto two identical resistors.
 \par
 Let's suppose the line voltage varies from $V_{min} = 200VAC$ to $V_{max} = 250VAC$ rms.
 $$ P_{input resistors} = \frac{V_{max}^2}{R_1 + R_2}$$
