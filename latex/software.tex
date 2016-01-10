@@ -96,6 +96,29 @@ A professional implementation of a parallel pid with integral saturation, implem
 % TODO: quote the app note
 
 \subsection{Architecture}
+Numerous program architectures have been published throughout embedded programming books.
+%TODO: quote
+However, they all fall in one of the following three groups:
+\begin{itemize}
+\item{Continuous execution - suitable for very simple programs or devices, which do exactly one thing.
+The software performs it's tasks one after the other, waiting as long as needed for the tasks to complete.}
+\item{Cooperative multitasking - used for complex embedded applications in resource-constrained emvironments.
+Timer tick is defined and upon each tick, the software performs all scheduled tasks.
+The differences with the above are:}
+\begin{enumerate}
+\item{The tasks are performed once per specified time period, and not continuosly.
+This is important for the PID algorithm.}
+\item{As a consequence, tasks must be written with multitasking in mind.
+Even a single process, which blocks for longer than the timer tick, would violate the real-time operation of the system.}
+\end{enumerate}
+\item{True preemptive multitasking - used for complex systems, such as personal computer operating systems.
+This approach is far superior to all others, because programs are easily written, and it is the operating system's responsibility to schedule them efficiently.
+Unfortunately, this is a complex taks, utilizing expensive (id est slow and memory consuming) algorithms.
+Nevertheless, there exist lightweight multitasking operating systems for atmega devices.}
+\end{itemize}
+% TODO: quote a couple of references
+The author has selected the secodnd approach.
+
 \subsection{Configuration}
 \subsection{Clock}
 \subsection{Serial communication}
