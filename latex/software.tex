@@ -168,10 +168,48 @@ Utilizing the multitasking architecture of the software, a 'commands' module is 
 An added advantage of the commands system is that the device is fully scriptable.
 Elaborating, a 'bash' script can issue commands to the system and read status back.
 Such a script can, for example, log temperature data and performed control actions by the device.
-As a matter of fact, such a script is provided, together iwth a Qt4 implementation of a temperature data visualization tool.
+As a matter of fact, such a script is provided, together with a Qt4 implementation of a temperature data visualization tool.
 For more details, see the section Plotting tool
 
 \subsubsection{Zero-cross detector}
+An elaborate algorithm for mains voltage control was implemented.
+The following options were considered:
+\begin{itemize}
+\item{Perform pulse width modulation on the control signal to the heater.
+The sinusoidal nature of mains voltage introduces an absolute timing error of up to $2 * 10\si{\milli\second}$.
+In the author's oppinion, with this simple scheme, only on-off control is possible.}
+\item{Perform classical phase control.
+This approach has proven itself over the years.
+Furthermore, extensive literature is available, concerning this well-understood phenomenon.}
+%TODO: quote Shishkov
+\item{Measure AC phase and turn on only specific integer number of half-waves.}
+\end{itemize}
+As a PID control algorithm is desired, the first approach is immediately discarded.
+The author moved away from the second approach for the following reasons.
+The device in it's entirety is connected to the mains in a single point.
+Phase control not only produces significant electro-magnetic interference, but also requires a zero-cross detector.
+Such a detector relies on the clan waveform of the measured signal.
+Consequenctly, in such a scheme, the triac would be injecting noise into the zero-cross sensor, nessetiating extensive filtering, with all of the associated complexity and latency.
+\par
+Consequencly, the author has selected the final approach.
+By paying the price of less resolution than actual analog phase control, the following benefits have been attained:
+\begin{itemize}
+\item{Significantly reduced EMI - the selective activation of separate half-periods introduces a harmonic of $100\si{\hertz}$ frequency.
+However, it's power is believed to be significantly lower than the combined power of the infinite spectrum ofa  phase-controlled system.}
+\item{Simplified control - phase control would have nesseciated floating point numbers.
+Linking in the floating point math library is expensive (both execution speed and storage space wise).}
+\item{Indeterminate - the IEEE standard for floating point implementation in computers highlights numerous cases, where the result of a computation is implementation-dependent.
+In contrast, an integer number implementation is always fully deterministic.}
+%TODO: quote
+\end{itemize}
+\par
+But wait!
+The author has identified an algorithm to increase the precision to theoretically infinite value.
+By utilizing a variation of Bresenham's line algorithm, comulative error is eliminated given enough time.
+% TODO: quote
+Furthermore, the algorithm supports safe modification of the setpoint, without relying on the fact, that the system tick is of known duration.
+The implementation of the algorithm is quite simple and can be observed in file src/zcd.c, being contained in the function shoudl\_turn\_on();
+
 \subsubsection{Triac cotnrol}
 \subsubsection{Temperature measurement}
 \subsection{Plotting tool}
