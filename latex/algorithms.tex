@@ -1,11 +1,51 @@
 \section{Algorithms}
 \subsection{PID implementation}
+Used is a discret pid algorithm with parallel structure and integral windup.
+The computer implementation expects proportional integral and derivative gains, as opposed to time constants.
+Consequencly, the responsibility for translating from $T_i, T_d$ to $K_i, K_d$ falls to the client software, written by the author.
+
+\subsection{Units of measure}
+Because various physical and computational resources are performed in the system, unit conversions need to be carefully considered.
+\par
+We are constrained by the PID algorithm software to use 'int16\_t' values for input, output and coefficients.
+Furthermore, coefficients are represented in 9s6 format i.e. $128 == 1.0$.
+\par
+Secondly, the temperature sensor interface library returns 'decicelsius\_t'.
+This is an integral value of measured degrees celsius, multiplied by 10.
+The accuracy of the thermometer is $0.5\si{\celsius}$
+\par
+Last constraint is the input to the triac control.
+In an attempt to increase the resolution of the triac control algorithm as far as possible, the author has used the whole range of 'uint16\_t' values.
+In other words, 0 corresponds to 0\% or 0\si{\volt} at the heater, and $2^16 \equiv 65536$ corresponds to 100\% or 230\si{\volt} at the heater.
+\par
+Apparently, the PID algorithm needs to read 'decicelsius\_t' and output 'uint16\_t', which is impossible.
+One of the two units needs to be selected for the algorithm to work with, and the other - converted to/from.
+The author has selected 'decicelsius\_t' as the more human-readable format.
+Furthermore, no aditional precision is lost by using this shriked type.
+
+\subsection{Nonlinearity}
+The heating circuit is expected to exhibit good linearity.
+However, the cooling process is both not under the control of the regulator, and extremely non-linear.
+The author expects cooling to conform to the Stefan-Bolzman law of radiated thermal energy in free space:
+$$ L = \frac{\sigma}{\pi}T^4 $$
+If this is true, estimating a transfer function of the whole system is pointless.
+The resulting linear system will be close to reality only for a very limited range of setpoints.
 
 \subsection{Ziegler-Nichols sustained oscillations}
+Initially, the Ziegler-Nichols algorithm for obtaining sustained oscillations and thus critical gain $K_u$ and critical period $T_u$ was attempted.
+It was observed that if any oscillations are observed at all, their amplitude is lower than the absolute error in the system.
 \includegraphics[width=0.85\textwidth]{../images/exp_gain100}~
 
 \subsection{Astrom-Hagglund sustained oscillations}
+Secondly, replacing the PID controller with a relay was attempted.
+The relay acts as a sign function.
+It was observed that again no sustained oscillations are exhibited by the system.
 \includegraphics[width=0.85\textwidth]{../images/exp_relay}~
 
-\subsection{Sampling rate}
+\subsection{Sampling rate correction}
+Following advice in the literature, the author increased the control algorithm period to roughly $1/10$'th of the dominant open loop system time constant, namely to 60 seconds.
+Finally sustained oscillations were observed.
+\\
+\includegraphics[width=0.85\textwidth]{../images/exp_relay_slow}~
+
 
