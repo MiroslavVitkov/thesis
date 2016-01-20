@@ -82,8 +82,38 @@ The period and magnitude of the resultant oscillations are measured.
 Together with the loop time and the amplitude of the relay, a second table provides suggestions on $K_p$, $T_i$. $T_d$.
 This method is considered an improvement on the Ziegler-Nighols I method.
 \par
-Astrom-Hagglund
+\textbf{Astrom-Hagglund} also utilize the self-oscilating mode of target plant.
+However, this method advies a different way of controlling the system into oscilations.
+This relay-based method is believed to be more effective tahn ZN for stable or inert plants.
+\par
+Of course there exist numerous core complicated tuning algorithms, many of which propriatery.
+Just to name a few: optimization of value function, neural networs, robust parameters for controlling stochastic plant.
 
+\subsubsection{Digital PID controller}
+One method relies on the following assumptions:
+\begin{itemize}
+\item[--]{$u_i(t)$ is estimated using second rectangle method}
+\item[--]{$u_b(t)$ is estimated via first backwards finate difference.}
+\end{itemize}
+This is the non-recursive descrtiption of the controller:
+\begin{equation}
+    u(k) = K_p \Bigg[
+    e(k) + \frac{T_0}{T_i} \sum_{i=1}^{k} e(i) + \frac{T_d}{T_0} (e(k)-e(k-1))
+    \Bigg]
+\end{equation}
+\par
+If the control law is to be computed by a digital device, a more efficient approach would be as follows.
+Let us assume
+$$ K_i \frac{K_p T_0}{T_i} $$
+$$ K_d = \frac{K_p T_d}{T_0} $$
+Then the PID controlelr can be written in the following rocursive format:
+\begin{equation}
+    u(k) = K_p e(k) + I(k) + K_d (e(k) - e(k-1))
+\end{equation}
+\begin{equation}
+    I(k) = I(k-1) + K_i e(k),
+    I(0) = 0
+\end{equation}
 
 % end of stupid theory
 \subsection{PID implementation}
