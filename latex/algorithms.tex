@@ -1,8 +1,8 @@
 \section{Algorithms}
 \subsection{Theory}
-\subsubsection{PID controller}
+\subsubsection{Parallel PID controller}
 % Translated from Garipov, Digital Control Systems 1, page 33.
-The PID controller is an enchancement of the PI controller.
+The analog PID controller is an enchancement of the PI controller.
 An aditional compoennt is assed to the PI sum.
 It depends on the speed of change of the error but is expected to be zero at steady-state.
 Here is how PID control looks like in the time domain:
@@ -15,7 +15,50 @@ In state space the PID control law looks like this:
 \begin{equation}
     u(s) = K_p e(s) + K_p \frac{1}{T_i s} + K_p T_d s e(s) = u_p(s) + u_i(s) + u_d(s)
 \end{equation}
+And for the transfer function (this is a \underline{parallel} structure PID) we have:
+\begin{equation}
+    W_{pid}(s) = \frac{u(s)}{e(s)} = K_p + K_p \frac{1}{T_i s} + K_p T_d s =
+    K_p \Bigg[ \frac{T_i T_d s^2 + T_i s + 1}{T_i s}  \Bigg]
+\end{equation}
+The advantages of the PID controller include swift transient processes and reduced overshoot.
+The main disadvantages is that when either the setpoint $u(t)$ or the Load Disturbance changes,
+the effect is opposite - the derivative term strives for overshoot.
+This is called 'set point kick' and is malitious.
 
+\subsubsection{Anti-windup}
+Among numerous practical applications, the permissible range of values for the controller output is limited.
+For example, a mechanical valve cannot be opened wider than it's physical construction allows.
+A triac-controlled heater cannot supply negative thermal energy.
+When the control signal $u(t)$ exceeds the maximum possible control, the integral factor becomes ineffective.
+\par
+The most popular algorithms for aveliating this problem are:
+\begin{itemize}
+\item{Limmiting the magnitude of the integral sum in [$u^{max}, u^{min}]$}.
+\item{Summing only on valid computed control (not clipped). }
+\end{itemize}
+
+\subsubsection{Plant models}
+Some algorithms for tuning vontrollers rely on a model of the plant.
+Others rely on observing a step response or stable oscilaltions state.
+Thus, firstly the most commonly used models are examined.
+\par
+A two parameter model accounts for pure delay and first order plat dynamics.
+It is used for integrating plants.
+\begin{equation}
+    W(p) = \frac{a}{L p} e^{- L p}
+\end{equation}
+,where:  \\
+$L$ - pure time delay \\
+$a$ - coefficient.
+\par
+A three parameter model is insted of aperiodic type.
+\begin{equation}
+    W(p) = \frac{K_0}{1 + T p} e^{-Lp}
+\end{equation}
+where:  \\
+$L$ - pure time delay,  \\
+$K_0$ - gain,  \\
+$T$ - dominant time constant.
 
 \subsection{PID implementation}
 Used is a discret pid algorithm with parallel structure and integral windup.
