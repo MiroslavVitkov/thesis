@@ -1,4 +1,30 @@
 \section{Hardware}
+\subsection{Theory}
+
+\subsubsection{Bipolar transistor biasing}
+Saturation occurs when both PN junctions are forward-biased.
+In this mode the transistor is fully open, corresponding to logical "on" state.
+Cutting current to the base renders the device fully closed, or in logical "off" state.
+
+\subsubsection{Phototransistor}
+The phototransistor behaves similarly to an ordinary transistor with the exception that it's base region is sensitive to light.
+When no light is falling onto the base, the emitter current is:
+\begin{equation}
+    I_T = I_{CB0} + \beta I_{CB0} = (1 + \beta) I_{CBO}
+\end{equation}
+If then line is shone onto the base region, the concentration of electrons and holes increases.
+A similar photo current, as with photodiodes, flows.
+The difference is that the curent gets amplified $1+\beta$ times compared to a photodiode.
+\par
+Devices only two LEDs are available.
+This mode of operation is called 'floating base'.
+It is thermally unstable.
+\par
+The alternative is to connect the (photosensitive) base to a suitable DC bias.
+In this configuration negative feedback is realized.
+As a result, the gain $\beta$ decreeses.
+The negative feedback provides further benefits beyond thermal stability.
+
 \subsection{Definitons}
 device - the entirety of all physical components, resulting from this project.  \\
 CTR - current transfer ratio, optocoupler characteristic.
