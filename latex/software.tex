@@ -1,4 +1,22 @@
 \section{Software}
+\subsection{Theory}
+\subsubsection(Radix tree)
+The radix tree is a data structure, suitable for storing and searching sets of strings.
+Each node, that is an only child, is merged with its parent.
+The operations, that can be performed on a radix tree, are as follows:
+\begin{itemize}
+\item{insertion}
+\item{deletion}
+\item{searching}
+\item{find all strings with common prefix}
+\item{find predecessor}
+\item{find successor}
+\end{itemize}
+All those operations exhibit complexity of O(k), where k is the length of the string.
+\par
+On the other hand, radix trees can only be applied to strings, or to sets wich are directly mappable to strings.
+They also need serializable types to work on.
+
 \subsection{Goals}
 The device is a typical realtime embedded system.
 As such, mainframe programming tecniques are not applicable and embedded systems approach is required.
