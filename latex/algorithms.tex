@@ -1,4 +1,22 @@
 \section{Algorithms}
+\subsection{Theory}
+\subsubsection{PID controller}
+% Translated from Garipov, Digital Control Systems 1, page 33.
+The PID controller is an enchancement of the PI controller.
+An aditional compoennt is assed to the PI sum.
+It depends on the speed of change of the error but is expected to be zero at steady-state.
+Here is how PID control looks like in the time domain:
+\begin{equation}
+    u(t) = K_p e(t) + K_p \frac{1}{T_i s} \int_0^{t_1} e(t) dt + K_p T_d \frac{d e(t)}{dt} = u_p(t) + u_i(t) + u_d(t)
+\end{equation}
+where $T_d$ is caleld derivative time constant.
+\par
+In state space the PID control law looks like this:
+\begin{equation}
+    u(s) = K_p e(s) + K_p \frac{1}{T_i s} + K_p T_d s e(s) = u_p(s) + u_i(s) + u_d(s)
+\end{equation}
+
+
 \subsection{PID implementation}
 Used is a discret pid algorithm with parallel structure and integral windup.
 The computer implementation expects proportional integral and derivative gains, as opposed to time constants.
