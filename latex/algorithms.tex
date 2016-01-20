@@ -60,6 +60,32 @@ $L$ - pure time delay,  \\
 $K_0$ - gain,  \\
 $T$ - dominant time constant.
 
+\subsubsection{PID tuning algorithms}
+The \textbf{tangent method} is a graphical or computational algorithm.
+A tangent line is constructed through the inflection point of the plant's step response.
+By measuring the coordinats of the itnersection of this tangent with y or x axis,
+the parameters of 2 or 3 parameter model are estimated.
+\par
+The \textbf{area-based method} for estimating coefficietnts of a 3 coefficient plat is a computational method.
+Measured is the area between the setpoint and step response.
+Also, measured is the area between the step response and x axis.
+Solely by using those two measurements, the area-based method estimates 3 parameter models.
+\par
+\textbf{Optimization-based methods} can fit models of unspecified order.
+\par
+The \textbf{first method of Zigler-Nichols} is significant both for its simplicity and for its hystory value.
+The algorithm defines mapping from coefficients in (5) to recommend p, i and d gains for the closed system.
+Even among the plethora of modern methods, Zeighle-Nichols I remains a useful starting point for more complex methods, such as optimizing or self-tuning.
+\par
+The \textbf{second method of Ziegler-Nichols} is based on steering the plant into sustained oscillations.
+The period and magnitude of the resultant oscillations are measured.
+Together with the loop time and the amplitude of the relay, a second table provides suggestions on $K_p$, $T_i$. $T_d$.
+This method is considered an improvement on the Ziegler-Nighols I method.
+\par
+Astrom-Hagglund
+
+
+% end of stupid theory
 \subsection{PID implementation}
 Used is a discret pid algorithm with parallel structure and integral windup.
 The computer implementation expects proportional integral and derivative gains, as opposed to time constants.
