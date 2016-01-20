@@ -214,6 +214,13 @@ The implementation of the algorithm is quite simple and can be observed in file 
 \subsubsection{Temperature measurement}
 
 \subsection{Plotting tool}
-The plotting tool was written from scratch by the author.
-It uses python2 and Qt4 to present on a full screean real-time plots of signals.
-Although the tool is simple and serves a single purpose, it is trivial to capture measured signals and log them ot a file, all while watching the real-time plot.
+Plotting a signal in real time can be acheaved by numerous approaches.
+Among them are MATLAB, Scylab, Mathematica, Qt etc.
+However, those that are not proprietery, are still badly suited to real-time operation.
+The author has thus selected the 'python' and 'matplotlib' technologies for their versability.
+\par
+The written plotting tool is called 'rtplot' - RealTime Plotting utility.
+It operates on a vector of signals, plotting them against different time periods.
+The longer time periods obtain their datapoints via algebraic averaging of the next shortest plot.
+The program output covers the whole display and presents axis labels and units of measure.
+Inidividual datapoints are also displayed, in addition to the interpolating line between them.
