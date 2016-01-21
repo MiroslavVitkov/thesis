@@ -23,7 +23,7 @@ And for the transfer function (this is a \underline{parallel} structure PID) we 
 The advantages of the PID controller include swift transient processes and reduced overshoot.
 The main disadvantages is that when either the setpoint $u(t)$ or the Load Disturbance changes,
 the effect is opposite - the derivative term strives for overshoot.
-This is called 'set point kick' and is malitious.
+This is called 'set point kick' and is malitious \cite[p. 33] {garipov}.
 
 \subsubsection{Anti-windup}
 Among numerous practical applications, the permissible range of values for the controller output is limited.
@@ -31,7 +31,7 @@ For example, a mechanical valve cannot be opened wider than it's physical constr
 A triac-controlled heater cannot supply negative thermal energy.
 When the control signal $u(t)$ exceeds the maximum possible control, the integral factor becomes ineffective.
 \par
-The most popular algorithms for aveliating this problem are:
+The most popular algorithms for aveliating this problem are \cite[p. 49] {garipov}:
 \begin{itemize}
 \item{Limmiting the magnitude of the integral sum in [$u^{max}, u^{min}]$}.
 \item{Summing only on valid computed control (not clipped). }
@@ -40,7 +40,7 @@ The most popular algorithms for aveliating this problem are:
 \subsubsection{Plant models}
 Some algorithms for tuning vontrollers rely on a model of the plant.
 Others rely on observing a step response or stable oscilaltions state.
-Thus, firstly the most commonly used models are examined.
+Thus, firstly the most commonly used models are examined \cite[p55]{garipov}.
 \par
 A two parameter model accounts for pure delay and first order plat dynamics.
 It is used for integrating plants.
@@ -64,7 +64,7 @@ $T$ - dominant time constant.
 The \textbf{tangent method} is a graphical or computational algorithm.
 A tangent line is constructed through the inflection point of the plant's step response.
 By measuring the coordinats of the itnersection of this tangent with y or x axis,
-the parameters of 2 or 3 parameter model are estimated.
+the parameters of 2 or 3 parameter model are estimated \cite[p. 55]{garipov}.
 \par
 The \textbf{area-based method} for estimating coefficietnts of a 3 coefficient plat is a computational method.
 Measured is the area between the setpoint and step response.
@@ -90,7 +90,7 @@ Of course there exist numerous core complicated tuning algorithms, many of which
 Just to name a few: optimization of value function, neural networs, robust parameters for controlling stochastic plant.
 
 \subsubsection{Digital PID controller}
-One method relies on the following assumptions:
+One method relies on the following assumptions \cite[p. 88]{garipov}:
 \begin{itemize}
 \item[--]{$u_i(t)$ is estimated using second rectangle method}
 \item[--]{$u_b(t)$ is estimated via first backwards finate difference.}
