@@ -16,6 +16,19 @@ All those operations exhibit complexity of O(k), where k is the length of the st
 \par
 On the other hand, radix trees can only be applied to strings, or to sets wich are directly mappable to strings.
 They also need serializable types to work on.
+\subsubsection{Cooperative multitasking}
+Cooperative multitasking is a strategy for systems, which need to run separate tasks in parallel.
+The is different from cooperative multitasking, where the scheduler periodically interrupts the running process and initializes contex switch.
+\par
+Using this strategy forces the programmer to design all the tasks in a specific way.
+Each task must return control to the environment after doing a small ammount of work.
+This can become extremely difficult is there is no obvious main loop, or for long-running functions.
+If a process does not return timely, all other processes become CPU starved and freeze.
+\par
+One of the advantages of commperative multitasking is that context switches are controlled by the programmer.
+This way shared data can be proteced and fewer atomic sections need to be erected.
+Another consequence of this rather simple design is low overhead.
+% from http://encyclopedia2.thefreedictionary.com/cooperative+multitasking
 
 \subsection{Goals}
 The device is a typical realtime embedded system.
