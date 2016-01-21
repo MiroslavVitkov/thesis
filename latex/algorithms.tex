@@ -170,6 +170,33 @@ Following advice in the literature\cite{garipov-ident}, the author increased the
 Finally sustained oscillations were observed.
 \\
 \includegraphics[width=0.85\textwidth]{../images/exp_relay_slow}~
+\\
+We observe 10 minute rise time and 3 mintute fall time.
+The oscillation amplitude is 29 C.
+\begin{equation}
+    K_u = \frac{4 d}{\pi a} = \frac{4*50}{\pi 29} \approx 9.90
+\end{equation}
+\begin{equation}
+    P_u = P_r + P_f = 13 * 0.6 * 60 = 780 seconds
+\end{equation}
+By the second method of Ziegler-Nichols, we calculate \cite{garipov}
+\begin{equation}
+    K_p = 0.6 K_u = 5.94
+\end{equation}
+\begin{equation}
+    T_i = 0.5 T_u = 390 \si{\second}
+\end{equation}
+\begin{equation}
+    T_d = 0.125 T_u = 97.5 \si{\second}
+\end{equation}
+\par
+The calcualted values correspond to an analog PID controller.
+Normally, discretization would need to be performed on the model and the obtained coefficietns.
+However, in the current application, the control loop time is about two orders of magnitude faster than the dominant time cosntant.
+\par
+Another consequence of running the experiment with different time constant than the real controller is that time is scaled.
+Consequently, after running a tuning loop with period of 60s in order to tune a controller, running with loop time of 1s,
+all obtained time cosntat coefficients need to be devided by 60.
 
 \subsection{Peak detector}
 A peak detector software module identifies local maxima and minima via 2 sample memory.
