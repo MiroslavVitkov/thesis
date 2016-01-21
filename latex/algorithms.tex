@@ -89,8 +89,14 @@ This relay-based method is believed to be more effective tahn ZN for stable or i
 Of course there exist numerous core complicated tuning algorithms, many of which propriatery.
 Just to name a few: optimization of value function, neural networs, robust parameters for controlling stochastic plant.
 
+\subsubsection{Digital control systems}
+Computer control systems sample their imputs\cite[p. 904]{modern-control} at discrete intervals of time.
+Assuming that the analog signal is constant in the unmeasureable moments is suitable approximation.
+The (logical) devices, which perform conversion between analog and discrete time domain are sampler and respectively n-th level hold.
+
+
 \subsubsection{Digital PID controller}
-One method relies on the following assumptions \cite[p. 88]{garipov}:
+One method \cite{garipov} relies on the following assumptions \cite[p. 88]{garipov}:
 \begin{itemize}
 \item[--]{$u_i(t)$ is estimated using second rectangle method}
 \item[--]{$u_b(t)$ is estimated via first backwards finate difference.}
