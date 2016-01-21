@@ -165,4 +165,20 @@ Finally sustained oscillations were observed.
 \\
 \includegraphics[width=0.85\textwidth]{../images/exp_relay_slow}~
 
+\subsection{Peak detector}
+A peak detector software module identifies local maxima and minima via 2 sample memory.
+It is equivelend to 1-dimentional 2nd order casual digital filter.
+During experiments it was established taht regardless of the inertial properties of the process, small local extrema (noise) twart the measurement.
+\par
+As the peak detector circuit is not expected to be low-latency, non-casual filter can be used for increased noise stability.
+Proposed is a 6-sample memory filter of the type:
 
+\par $
+    y(k) = (x(k-3) \geq x(k)) \land (x(k-2) \geq x(k)) \land (x(k-1) \geq x(k)) \land
+           (x(k+1) < x(k)) \land (x(k+2) < x(k)) \land (x(k+3) < x(k))
+$ \par
+where, \\
+$y(k)$ - this function is 1 (true) during a local maximum, 0 (false) otherwise. \\
+$x(k)$ - measured process output at k-th time period.
+\\
+This solution is superior to classical low-frequency because it does not introduce error in signal timestamps.
