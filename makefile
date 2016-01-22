@@ -1,4 +1,7 @@
 all:
+	# Preliminary build to help bibtex and makeindex.
+	# Compile biblography from latex/main.bib and main.aux.
+	# Compile everything with updated bibtex and makeindex.
 	cd latex && \
 	pdflatex --output-directory ../build main.tex && \
         cd ../build  && \
