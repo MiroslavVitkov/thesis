@@ -6,7 +6,7 @@
 \usepackage{adjustbox}
 
 \newlength\someheight
-\setlength\someheight{3cm}
+\setlength\someheight{100cm}
 
 % Personal information.
 \title{Multitasking Autotuning PID Controller in Heat Transfer Application}
@@ -30,6 +30,30 @@
 \end{frame}
 
 % Software.
+\begin{frame}[fragile]
+\begin{adjustbox}{width=\textwidth,height=\someheight,keepaspectratio}
+\begin{lstlisting}
+// Decide if this particular half-wave should be turned on. Further discussion:
+// http://programmers.stackexchange.com/questions/304546/algorithm-to-express-an-integer-as-a-sum-of-some-binary-numbers
+// The function simulates an uint16_t overflow.
+bool should_turn_on()
+{
+    static uint32_t acu = 0;
+    acu += g_setpoint;
+    if(acu > PROC_VAL_MAX)
+    {
+        acu &= PROC_VAL_MAX;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+\end{lstlisting}
+\end{adjustbox}
+\end{frame}
+
 \begin{frame}[fragile]
 \frametitle{Peak deterctor algorithm}
 \begin{adjustbox}{width=\textwidth,height=\someheight,keepaspectratio}
