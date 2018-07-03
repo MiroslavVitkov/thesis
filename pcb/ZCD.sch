@@ -1,0 +1,164 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:special
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+EELAYER 27 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title "noname.sch"
+Date "9 jan 2016"
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L LTV-354T IC1
+U 1 1 5690F754
+P 5250 3250
+F 0 "IC1" H 5040 3440 40  0000 C CNN
+F 1 "SFH620A-3" H 5360 3060 40  0000 C CNN
+F 2 "MFSOP6" H 5090 3070 30  0001 C CIN
+F 3 "~" H 5250 3250 60  0000 C CNN
+	1    5250 3250
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R1
+U 1 1 5690F7D2
+P 4400 3150
+F 0 "R1" V 4480 3150 40  0000 C CNN
+F 1 "68k" V 4407 3151 40  0000 C CNN
+F 2 "~" V 4330 3150 30  0000 C CNN
+F 3 "~" H 4400 3150 30  0000 C CNN
+	1    4400 3150
+	0    -1   -1   0   
+$EndComp
+$Comp
+L R R2
+U 1 1 5690F815
+P 4400 3350
+F 0 "R2" V 4480 3350 40  0000 C CNN
+F 1 "68k" V 4407 3351 40  0000 C CNN
+F 2 "~" V 4330 3350 30  0000 C CNN
+F 3 "~" H 4400 3350 30  0000 C CNN
+	1    4400 3350
+	0    -1   -1   0   
+$EndComp
+$Comp
+L R R3
+U 1 1 5690F85E
+P 5800 2800
+F 0 "R3" V 5880 2800 40  0000 C CNN
+F 1 "2k4" V 5807 2801 40  0000 C CNN
+F 2 "~" V 5730 2800 30  0000 C CNN
+F 3 "~" H 5800 2800 30  0000 C CNN
+	1    5800 2800
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 5690F881
+P 5800 3450
+F 0 "#PWR?" H 5800 3450 30  0001 C CNN
+F 1 "GND" H 5800 3380 30  0001 C CNN
+F 2 "" H 5800 3450 60  0000 C CNN
+F 3 "" H 5800 3450 60  0000 C CNN
+	1    5800 3450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4900 3150 4650 3150
+Wire Wire Line
+	4650 3350 4900 3350
+Wire Wire Line
+	5600 3150 6100 3150
+Wire Wire Line
+	5800 3150 5800 3050
+$Comp
+L +5VD #PWR?
+U 1 1 5690F912
+P 5800 2400
+F 0 "#PWR?" H 5800 2350 20  0001 C CNN
+F 1 "+5VD" H 5800 2500 30  0000 C CNN
+F 2 "" H 5800 2400 60  0000 C CNN
+F 3 "" H 5800 2400 60  0000 C CNN
+	1    5800 2400
+	1    0    0    -1  
+$EndComp
+$Comp
+L CONNECTOR P?
+U 1 1 5690F99E
+P 6100 3150
+F 0 "P?" H 6450 3250 70  0001 C CNN
+F 1 "OUT" H 6450 3050 70  0000 C CNN
+F 2 "~" H 6100 3150 60  0000 C CNN
+F 3 "~" H 6100 3150 60  0000 C CNN
+	1    6100 3150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5800 2550 5800 2400
+Connection ~ 5800 3150
+Wire Wire Line
+	5600 3350 5800 3350
+Wire Wire Line
+	5800 3350 5800 3450
+$Comp
+L CONNECTOR P?
+U 1 1 5690FB8D
+P 3900 3150
+F 0 "P?" H 4250 3250 70  0001 C CNN
+F 1 "AC" H 4250 3050 70  0001 C CNN
+F 2 "~" H 3900 3150 60  0000 C CNN
+F 3 "~" H 3900 3150 60  0000 C CNN
+	1    3900 3150
+	-1   0    0    1   
+$EndComp
+$Comp
+L CONNECTOR P?
+U 1 1 5690FBA6
+P 3900 3350
+F 0 "P?" H 4250 3450 70  0001 C CNN
+F 1 "VAC" H 4250 3250 70  0000 C CNN
+F 2 "~" H 3900 3350 60  0000 C CNN
+F 3 "~" H 3900 3350 60  0000 C CNN
+	1    3900 3350
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	3900 3150 4150 3150
+Wire Wire Line
+	4150 3350 3900 3350
+$EndSCHEMATC
